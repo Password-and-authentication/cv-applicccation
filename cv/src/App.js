@@ -2,49 +2,57 @@ import "./styles.css";
 import General from "./components/General";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import img from "./pencil.svg"
 import img2 from "./check-bold.svg"
 
-class App extends React.Component {
 
-  constructor(props) {
-    super(props)
+export function Appster() {
+  const [isClicked, setIsClicked] = useState(false)
 
-    this.state = {isClicked: false, text: "WWWWW"}
+  useEffect(() => {
+   
+  })
 
-    this.edit = this.edit.bind(this)
-    
+  let el;
+  if (isClicked) {
+    el = <div>is clicked is true</div>
+  } else {
+    el = <div>its false</div>
   }
 
-  edit() {
-    this.setState({
-      isClicked: !this.state.isClicked
-    })
-  }
-
-  
-
-  render() {
-    const isClicked = this.state.isClicked
-    let el;
-    if (isClicked === true) {
-      el = <img src={img2} onClick={this.edit} className="edit"></img>
-    } else {
-      el = <img src={img} onClick={this.edit} className="edit"></img>
-    }
-    return(
-      <div className="App">
-
-       {el}
-        
-      <General isClicked={this.state.isClicked} />
-     
-      <Education isClicked={this.state.isClicked}/>
-      <Experience edit={this.edit} isClicked={this.state.isClicked}/>
+  return (
+    <div>
+      <button onClick={() => setIsClicked(!isClicked)}>edit</button>
+      {el}
+      
     </div>
-    )
+  )
+}
+
+function App() {
+
+  const [isClicked, setIsClicked] = useState(false)
+
+  let el;
+  if (isClicked) {
+
+    el = <img src={img2} onClick={() => setIsClicked(!isClicked)} className="edit"></img>
+  } else {
+    el = <img src={img} onClick={() => setIsClicked(!isClicked)} className="edit"></img>
   }
+
+  return(
+    <div className="App">
+
+      {el}
+      <General isClicked={isClicked} />
+      <Education isClicked={isClicked} />
+      <Experience isClicked={isClicked} />
+
+    </div>
+  )
+ 
 }
 
 

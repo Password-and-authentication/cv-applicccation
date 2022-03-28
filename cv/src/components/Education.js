@@ -1,53 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
 
-class Education extends React.Component {
-    constructor(props) {
-        super(props)
+function Education(isClicked) {
 
-        this.state = {
-            school: "Tapiolan lukio",
-            title: "High school",
-            date: "2017 - 2020"
-        }
-
-        this.handleChange = this.handleChange.bind(this)
-    }
+    const [school, setSchool] = useState("Tapiolan yläkoulu")
+    const [title, setTitle] = useState("High school")
+    const [date, setDate] = useState("2017 -2020")
     
-    handleChange(e) {
-        console.log(e.target.id)
-        this.setState({
-            [`${e.target.id}`]: e.target.value
-        })
+    let schoolEl;
+    let titleEl;
+    let dateEl;
+    if (isClicked) {
+        schoolEl = <input id="school" defaultValue={school} onChange={(e) => setTitle(e.target.value)}></input>
+        titleEl = <input id="title" defaultValue={title} onChange={(e) => setTitle(e.target.value)}></input>
+        dateEl = <input id="date" defaultValue={date} onChange={(e) => setDate(e.target.value)}></input>
+    } else {
+        schoolEl = <span>{school}</span>
+        titleEl = <span>{title}</span>
+        dateEl = <span>{date}</span>
     }
 
-    render() {
-        const isClicked = this.props.isClicked
-        let schoolEl;
-        let titleEl;
-        let dateEl;
-        if (isClicked === true) {
-            schoolEl = <input id="school" defaultValue={this.state.school} onChange={this.handleChange}></input>
-            titleEl = <input id="title" defaultValue={this.state.title} onChange={this.handleChange}></input>
-            dateEl = <input id="date" defaultValue={this.state.date} onChange={this.handleChange}></input>
-            
-        } else {
-            schoolEl = <span>{this.state.school}</span>
-            titleEl = <span>{this.state.title}</span>
-            dateEl = <span>{this.state.date}</span>
-        }
+    return(
+        <div className="Education">
 
-        return(
-            <div className="Education">
                 <h2>Education</h2>
                 <h3 className="titles">School: {schoolEl} </h3>
                 <h3 className="titles">Title of Study: {titleEl} </h3>
                 <h3 className="titles">Date of Study: {dateEl}</h3>
-                
 
             </div>
-        )
-    }
+    )
+    
 }
 
 export default Education;

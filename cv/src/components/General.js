@@ -1,69 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { edit } from "../App";
 
-class General extends React.Component {
-    constructor(props) {
-        super(props)
+function General(isClicked) {
+    const [name, setName] = useState("Eero Pomell")
+    const [address, setAddress] = useState("Takojantie 1B")
+    const [phone, setPhone] = useState("0458909489")
+    const [email, setEmail] = useState("Eeropomell1@gmail.com")
+   
 
-        this.state = {
-            name: "Eero Pomell",
-            address: "Takojantie 1B",
-            phone: "0458909489",
-            email: "Eeropomell1@gmail.com",
-            isClicked: this.props.isClicked
-        }
+    let el;
+    if (isClicked.isClicked === true) {
+        el = <form  className="top">
+        <input className="header" id="Name" onChange={(e) => setName(e.target.value)} defaultValue={name}></input>
 
-        this.handleChange = this.handleChange.bind(this)
-        
-    }
-
-    handleChange(e) {
-    
-        this.setState({
-            [`${e.target.id}`]: e.target.value
-        })
-    }
-
-    render() {
-        const isClicked = this.props.isClicked;
-        let el;
-        if (isClicked) {
-
-            el = 
-
-                <form  className="top">
-                <input className="header" id="name" onChange={this.handleChange} defaultValue={this.state.name}></input>
-
+        <div className="details">
+            <input id="Address" onChange={(e) => setAddress(e.target.value)} defaultValue={address}></input>
+            <input id="Phone" defaultValue={phone} onChange={(e) => setPhone(e.target.value)}></input>
+            <input id="Email" defaultValue={email} onChange={(e) => setEmail(e.target.value)}></input>
+        </div>
+        </form>
+    } else {
+        el = <div className="top">
+                <h1 className="header" >{name}</h1>
                 <div className="details">
-                    <input id="address" onChange={this.handleChange} defaultValue={this.state.address}></input>
-                    <input id="phone" defaultValue={this.state.phone} onChange={this.handleChange}></input>
-                    <input id="email" defaultValue={this.state.email} onChange={this.handleChange}></input>
-                </div>
-            </form>
-            
-            
-        } else {
-            el = <div className="top">
-                <h1 className="header" >{this.state.name}</h1>
-                <div className="details">
-                <h3 id="address" className="detail">{this.state.address}</h3>
-                <h3 id="phone" className="detail">{this.state.phone}</h3>
-                <h3 id="email" className="detail">{this.state.email}</h3>
+                <h3 id="address" className="detail">{address}</h3>
+                <h3 id="phone" className="detail">{phone}</h3>
+                <h3 id="email" className="detail">{email}</h3>
                 </div>
                
                 </div>
-           
-        }
-        
-        
-        return(
-            <div className="General">
-         
-                {el}
-
-            </div>
-        )
     }
+
+    return(
+        <div className="General">
+            {el}
+        </div>
+    )
+
 }
+
 
 export default General;

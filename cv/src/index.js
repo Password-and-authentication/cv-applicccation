@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App, {Appster} from './App';
 
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    <Appster />
   </React.StrictMode>,
   document.getElementById('root')
 );
